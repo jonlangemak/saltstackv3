@@ -1,0 +1,16 @@
+{
+  "CN": "{{ pillar['pki_info']['cert_name'] }}",
+  "key": {
+    "algo": "rsa",
+    "size": {{ pillar['pki_info']['key_size'] }}
+  },
+  "names": [
+    {
+      "C": "{{ pillar['pki_info']['cert_country'] }}",
+      "L": "{{ pillar['pki_info']['cert_city'] }}",
+      "O": "{{ pillar['pki_info']['cert_org'] }}",
+      "OU": "{{ pillar['pki_info']['cert_ou'] }}",
+      "ST": "{{ pillar['pki_info']['cert_province'] }}"
+    }
+  ]
+}

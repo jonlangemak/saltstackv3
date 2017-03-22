@@ -1,0 +1,23 @@
+{% set hosts = ["10.32.0.1","127.0.0.1"] -%}
+{% for node in salt['pillar.get']('kube_nodes', {}) -%} 
+  {% do hosts.append(salt['pillar.get']('kube_nodes:' ~ node ~ ':ipaddress')) -%}
+  {% do hosts.append(salt['pillar.get']('kube_nodes:' ~ node ~ ':fqdn')) -%}
+{% endfor %}
+
+{
+  "CN": "{{ pillar['pki_info']['cert_name'] }}",
+  "hosts": {{ hosts | json }},
+  "key": {
+    "algo": "rsa",
+    "size": {{ pillar['pki_info']['key_size'] }}
+  },
+  "names": [
+    {
+      "C": "{{ pillar['pki_info']['cert_country'] }}",
+      "L": "{{ pillar['pki_info']['cert_city'] }}",
+      "O": "{{ pillar['pki_info']['cert_org'] }}",
+      "OU": "{{ pillar['pki_info']['cert_ou'] }}",
+      "ST": "{{ pillar['pki_info']['cert_province'] }}"
+    }
+  ]
+}

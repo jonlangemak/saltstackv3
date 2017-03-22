@@ -1,0 +1,13 @@
+{
+  "signing": {
+    "default": {
+      "expiry": "{{ pillar['pki_info']['ca_expire'] }}"
+    },
+    "profiles": {
+      "{{ pillar['pki_info']['cert_name'] }}": {
+        "usages": ["signing", "key encipherment", "server auth", "client auth"],
+        "expiry": "{{ pillar['pki_info']['ca_expire'] }}"
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+base:
+  '*':
+    - kube_data
